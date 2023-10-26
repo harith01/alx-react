@@ -1,4 +1,18 @@
 .Notifications {
     border: 1px solid blue;
     padding: 3px;
+    position: relative;
+}
+
+[data-priority="default"] {
+    color: blue;
+}
+
+[data-priority="urgent"] {
+    color: red;
+}
+
+button img {
+    width: 20px;
+    height: 20px;
 }

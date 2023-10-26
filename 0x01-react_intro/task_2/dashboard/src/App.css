@@ -25,3 +25,11 @@ img {
   text-align: left;
 }
 
+input {
+  margin-left: 5px;
+}
+
+label {
+  margin-right: 5px;
+}
+

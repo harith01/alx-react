@@ -16,9 +16,9 @@ function Notifications() {
       </button>
       <p>Here is the list of notifications</p>
       <ul>
-        <NotificationItem data="default" value="New course available" />
-        <NotificationItem data="urgent" value="New resume available" />
-        <NotificationItem html="<u>test</u>" />
+        <NotificationItem type="default" value="New course available" />
+        <NotificationItem type="urgent" value="New resumee available" />
+        <NotificationItem type="urgent" html={getLatestNotification()} />
       </ul>
     </div>
   );

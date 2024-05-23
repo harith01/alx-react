@@ -8,10 +8,19 @@ $('body').append('<p id="count"></p>');
 $('body').append('<p>Copyright - Holberton School</p>');
 
 
-let times = 0;
-const updateCounter = () => {
-    times += 1;
-    $('#count').html(`${times} clicks on the button`);
-};
+let count = 0;
 
-$('button').on("click", _debounce(updateCounter));
+function updateCounter() {
+  count += 1;
+  $('#count').text(`${count} clicks on the button`);
+}
+
+$('button').on('click', _.debounce(updateCounter, 500));
+
+// let times = 0;
+// const updateCounter = () => {
+//     times += 1;
+//     $('#count').html(`${times} clicks on the button`);
+// };
+
+// $('button').on("click", _debounce(updateCounter));

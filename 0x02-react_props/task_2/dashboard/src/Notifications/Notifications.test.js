@@ -8,9 +8,9 @@ describe('Test Notifications componenet', () => {
         expect(wrapper).toBeDefined();
     });
 
-    it('renders three list items', () => {
+    it('renders three notificationItem components', () => {
         const wrapper = shallow(<Notifications />);
-        expect(wrapper.find('li')).toHaveLength(3);
+        expect(wrapper.find('ul').children()).toHaveLength(3);
     });
 
     it('it renders the correct text', () => {

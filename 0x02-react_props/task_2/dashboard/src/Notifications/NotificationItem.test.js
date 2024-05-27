@@ -20,8 +20,8 @@ describe('NotificationItem Component', () => {
     it('renders correct html from  html="<u>test</u>" props', () => {
         const wrapper = shallow(<NotificationItem />);
     
-        wrapper.setProps({ html: "<u>test</u>" });
-        expect(wrapper.html()).toEqual('<li data-urgent="true"><u>test</u></li>');
+        wrapper.setProps({ html: "<u>test</u>", type:"urgent"});
+        expect(wrapper.html()).toEqual('<li data-notification-type="urgent"><u>test</u></li>');
     });
 });
 

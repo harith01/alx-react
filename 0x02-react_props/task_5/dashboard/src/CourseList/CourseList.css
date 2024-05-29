@@ -1,0 +1,14 @@
+th {
+    border-bottom: 1px solid #ddd;
+}
+
+table {
+    border: 1px solid #ddd;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+[colSpan="2"] {
+    text-align: center;
+}

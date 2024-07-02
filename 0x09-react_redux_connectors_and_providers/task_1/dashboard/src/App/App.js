@@ -11,7 +11,6 @@ import { getLatestNotification } from "../utils/utils";
 import { StyleSheet, css } from "aphrodite";
 import { AppContext, defaultUser, defaultLogOut } from "./AppContext";
 import { connect } from "react-redux";
-import { displayNotificationDrawer, hideNotificationDrawer } from "../actions/uiActionCreators";
 
 const listCourses = [
   { id: 1, name: "ES6", credit: 60 },
@@ -26,10 +25,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleKeyCombination = this.handleKeyCombination.bind(this);
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.logIn = this.logIn.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
 
     this.state = { 
+      displayDrawer: false,
       user: defaultUser,
       logOut: () => {
         this.setState({ user: defaultUser })
@@ -49,7 +51,9 @@ class App extends Component {
     }
   }
 
-
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true });
+  }
 
   logIn(email, password) {
     this.setState({
@@ -68,7 +72,9 @@ class App extends Component {
   }
 
 
- 
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false });
+  }
 
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyCombination);
@@ -80,19 +86,15 @@ class App extends Component {
 
   render() {
     
-    const { 
-      displayDrawer,
-      displayNotificationDrawer,
-      hideNotificationDrawer,
-    } = this.props;
+    const { displayDrawer } = this.props;
 
     return (
       <AppContext.Provider value={{ user: this.state.user, logOut: this.state.logOut}}>
         <Notifications
           listNotifications={this.state.listNotifications}
           displayDrawer={displayDrawer}
-          handleDisplayDrawer={displayNotificationDrawer}
-          handleHideDrawer={hideNotificationDrawer}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
           markNotificationAsRead={this.markNotificationAsRead}
         />
         <div className={css(styles.container)}>
@@ -123,30 +125,14 @@ class App extends Component {
   }
 }
 
-export const mapStateToProps = (state) => ({
-  isLoggedIn: state.uiReducer.isUserLoggedIn,
-  displayDrawer: state.uiReducer.isNotificationDrawerVisible,
-})
-
-export const mapDispatchToProps = {
-  displayNotificationDrawer,
-  hideNotificationDrawer
-}
-
 App.defaultProps = {
   isLoggedIn: false,
   logOut: () => {},
-  displayDrawer: false,
-  displayNotificationDrawer: () => {},
-  hideNotificationDrawer: () => {},
 };
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
   logOut: PropTypes.func,
-  displayDrawer: PropTypes.bool,
-  displayNotificationDrawer: PropTypes.func,
-  hideNotificationDrawer: PropTypes.func
 };
 
 const cssVars = {
@@ -187,4 +173,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export const mapStateToProps = (state) => ({
+  isLoggedIn: state.get('isUserLoggedIn'),
+	displayDrawer: state.get('isNotificationDrawerVisible'),
+})
+
+export default connect(mapStateToProps)(App);

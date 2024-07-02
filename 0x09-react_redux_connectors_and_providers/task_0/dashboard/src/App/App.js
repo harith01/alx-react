@@ -125,10 +125,6 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.uiReducer.isUserLoggedIn
-})
-
 App.defaultProps = {
   isLoggedIn: false,
   logOut: () => {},
@@ -176,5 +172,10 @@ const styles = StyleSheet.create({
     },
   },
 });
+
+
+export const mapStateToProps = (state) => ({
+  isLoggedIn: state.uiReducer.isUserLoggedIn,
+})
 
 export default connect(mapStateToProps)(App);
